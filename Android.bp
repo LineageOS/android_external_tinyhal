@@ -1,7 +1,5 @@
-/*
- * Copyright (C) 2020 Cirrus Logic, Inc. and
- *                    Cirrus Logic International Semiconductor Ltd.
- *                    All rights reserved.
+/**
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +14,11 @@
  * limitations under the License.
  */
 
-#include <string>
+soong_namespace {
+}
 
-namespace cirrus {
-
-bool harness_are_allocs_leaked();
-void harnessSetRedirectedProcPath(const std::string& name);
-} // namespace cirrus
+cc_library_headers {
+    name: "tinyhal_headers",
+    export_include_dirs: ["include"],
+    vendor_available: true,
+}
