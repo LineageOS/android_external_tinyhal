@@ -2471,7 +2471,7 @@ static int adev_open(const hw_module_t *module, const char *name,
     adev->hw_device.close_input_stream = adev_close_input_stream;
     adev->hw_device.dump = adev_dump;
 
-    property_get("ro.product.device", property, "generic");
+    property_get("ro.product.vendor.device", property, "generic");
     snprintf(file_name, sizeof(file_name), "%s/audio.%s.xml", ETC_PATH, property);
 
     ALOGV("Reading configuration from %s\n", file_name);

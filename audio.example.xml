@@ -6,7 +6,7 @@ file and expected content.
 
 On the target device this file must be located in /system/etc and named
 audio.<device>.xml, where <device> is the string returned by the system
-property ro.product.device
+property ro.product.vendor.device
 -->
 
 <audiohal>
