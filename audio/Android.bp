@@ -30,17 +30,17 @@ cc_library_shared {
         "-Wno-unused-parameter",
     ],
     shared_libs: [
-        "libcutils",
-        "libutils",
-        "libdl",
-        "liblog",
-        "libhardware",
-        "libtinyalsav2",
-        "libtinycompress",
         "libaudiohalcm",
         "libaudioutils",
+        "libcutils",
+        "libdl",
+        "libexpat",
+        "libhardware",
+        "liblog",
         "libsysutils",
-        "libexpat"
+        "libtinyalsav2",
+        "libtinycompress",
+        "libutils",
     ],
     header_libs: [
         "libtinyalsav2_headers",
@@ -57,18 +57,14 @@ soong_config_module_type {
     module_type: "cc_defaults",
     config_namespace: "tinyhal",
     bool_variables: [
-        "voice_recof_req_sthal",
         "tinycmopress_tstamp_long",
         "tinyhal_compress_playback",
+        "voice_recof_req_sthal",
     ],
     properties: [
         "cppflags",
         "shared_libs",
     ],
-}
-
-soong_config_bool_variable {
-    name: "voice_recof_req_sthal",
 }
 
 soong_config_bool_variable {
@@ -79,18 +75,22 @@ soong_config_bool_variable {
     name: "tinyhal_compress_playback",
 }
 
+soong_config_bool_variable {
+    name: "voice_recof_req_sthal",
+}
+
 tinyhal_cc_defaults {
     name: "audio.primary.tinyhal-defaults",
     soong_config_variables: {
-        voice_recof_req_sthal: {
-            cppflags: ["-DENABLE_STHAL_STREAMS"],
-            shared_libs: ["libscc_audio"]
-        },
         tinycmopress_tstamp_long: {
             cppflags: ["-DTINYCOMPRESS_TSTAMP_IS_LONG"],
         },
         tinyhal_compress_playback: {
             cppflags: ["-DTINYHAL_COMPRESS_PLAYBACK"],
+        },
+        voice_recof_req_sthal: {
+            cppflags: ["-DENABLE_STHAL_STREAMS"],
+            shared_libs: ["libscc_audio"],
         },
     },
 }

@@ -21,21 +21,21 @@ cc_library_shared {
     name: "libaudiohalcm",
     defaults: ["libaudiohalcm-defaults"],
     proprietary: true,
-	vendor: true,
+    vendor: true,
     cflags: [
-		"-DETC_PATH=\"/vendor/etc/\"",
+        "-DETC_PATH=\"/vendor/etc/\"",
         "-Werror",
         "-Wno-error=unused-parameter",
         "-Wno-unused-parameter",
     ],
     shared_libs: [
         "libcutils",
-        "libutils",
         "libdl",
-        "liblog",
+        "libexpat",
         "libhardware",
+        "liblog",
         "libtinyalsav2",
-        "libexpat"
+        "libutils",
     ],
     header_libs: [
         "libtinyalsav2_headers",
