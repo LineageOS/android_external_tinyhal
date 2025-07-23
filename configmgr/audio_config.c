@@ -522,7 +522,11 @@ static void apply_ctls_l(struct config_mgr *cm, struct ctl *pctl, const int ctl_
 
     for (i = 0; i < ctl_count; ++i, ++pctl) {
         if (ctl_open(cm, pctl) != 0) {
+#ifdef LIBAUDIOHALCM_CONTINUE_ON_CTL_OPEN_ERROR
+            continue;
+#else
             break;
+#endif
         }
 
         ctl = ctl_get_ptr(cm, &pctl->ref);

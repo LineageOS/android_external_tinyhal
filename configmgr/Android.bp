@@ -49,12 +49,17 @@ soong_config_module_type {
     module_type: "cc_defaults",
     config_namespace: "tinyhal",
     bool_variables: [
+        "libaudiohalcm_continue_on_ctl_open_error",
         "tinyalsa_no_add_new_ctrls",
         "tinyalsa_no_ctl_get_id",
     ],
     properties: [
         "cppflags",
     ],
+}
+
+soong_config_bool_variable {
+    name: "libaudiohalcm_continue_on_ctl_open_error",
 }
 
 soong_config_bool_variable {
@@ -68,6 +73,9 @@ soong_config_bool_variable {
 libaudiohalcm_cc_defaults {
     name: "libaudiohalcm-defaults",
     soong_config_variables: {
+        libaudiohalcm_continue_on_ctl_open_error: {
+            cppflags: ["-DLIBAUDIOHALCM_CONTINUE_ON_CTL_OPEN_ERROR"],
+        },
         tinyalsa_no_add_new_ctrls: {
             cppflags: ["-DTINYALSA_NO_ADD_NEW_CTRLS"],
         },
