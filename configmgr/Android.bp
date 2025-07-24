@@ -54,7 +54,7 @@ soong_config_module_type {
         "tinyalsa_no_ctl_get_id",
     ],
     properties: [
-        "cppflags",
+        "cflags",
     ],
 }
 
@@ -74,13 +74,13 @@ libaudiohalcm_cc_defaults {
     name: "libaudiohalcm-defaults",
     soong_config_variables: {
         libaudiohalcm_continue_on_ctl_open_error: {
-            cppflags: ["-DLIBAUDIOHALCM_CONTINUE_ON_CTL_OPEN_ERROR"],
+            cflags: ["-DLIBAUDIOHALCM_CONTINUE_ON_CTL_OPEN_ERROR"],
         },
         tinyalsa_no_add_new_ctrls: {
-            cppflags: ["-DTINYALSA_NO_ADD_NEW_CTRLS"],
+            cflags: ["-DTINYALSA_NO_ADD_NEW_CTRLS"],
         },
         tinyalsa_no_ctl_get_id: {
-            cppflags: ["-DTINYALSA_NO_CTL_GET_ID"],
+            cflags: ["-DTINYALSA_NO_CTL_GET_ID"],
         },
     },
 }

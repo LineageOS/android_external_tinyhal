@@ -62,7 +62,7 @@ soong_config_module_type {
         "voice_recof_req_sthal",
     ],
     properties: [
-        "cppflags",
+        "cflags",
         "shared_libs",
     ],
 }
@@ -83,13 +83,13 @@ tinyhal_cc_defaults {
     name: "audio.primary.tinyhal-defaults",
     soong_config_variables: {
         tinycompress_tstamp_long: {
-            cppflags: ["-DTINYCOMPRESS_TSTAMP_IS_LONG"],
+            cflags: ["-DTINYCOMPRESS_TSTAMP_IS_LONG"],
         },
         tinyhal_compress_playback: {
-            cppflags: ["-DTINYHAL_COMPRESS_PLAYBACK"],
+            cflags: ["-DTINYHAL_COMPRESS_PLAYBACK"],
         },
         voice_recof_req_sthal: {
-            cppflags: ["-DENABLE_STHAL_STREAMS"],
+            cflags: ["-DENABLE_STHAL_STREAMS"],
             shared_libs: ["libscc_audio"],
         },
     },
