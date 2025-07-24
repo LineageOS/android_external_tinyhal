@@ -1,4 +1,28 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d375c9e_57ce8b18",
+        "filename": "configmgr/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2025-07-24T20:13:53Z",
+      "side": 1,
+      "message": "Why on earth didn\u0027t this follow the existing anming convention?",
+      "range": {
+        "startLine": 77,
+        "startChar": 26,
+        "endLine": 77,
+        "endChar": 39
+      },
+      "revId": "aa0514464238524294cc9f9fb713af1c36208cf9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ],
   "submitRequirementResults": []
 }
