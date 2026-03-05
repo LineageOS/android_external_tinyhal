@@ -19,7 +19,6 @@
 
 cc_library_shared {
     name: "audio.primary.tinyhal",
-    defaults: ["audio.primary.tinyhal-defaults"],
     relative_install_path: "hw",
     proprietary: true,
     vendor: true,
@@ -28,7 +27,16 @@ cc_library_shared {
         "-Werror",
         "-Wno-error=unused-parameter",
         "-Wno-unused-parameter",
-    ],
+    ] + select(soong_config_variable("tinyhal", "tinycompress_tstamp_long"), {
+        true: ["-DTINYCOMPRESS_TSTAMP_IS_LONG"],
+        default: [],
+    }) + select(soong_config_variable("tinyhal", "tinyhal_compress_playback"), {
+        true: ["-DTINYHAL_COMPRESS_PLAYBACK"],
+        default: [],
+    }) + select(soong_config_variable("tinyhal", "voice_recof_req_sthal"), {
+        true: ["-DENABLE_STHAL_STREAMS"],
+        default: [],
+    }),
     shared_libs: [
         "libaudiohalcm",
         "libaudioutils",
@@ -41,7 +49,10 @@ cc_library_shared {
         "libtinyalsav2",
         "libtinycompress",
         "libutils",
-    ],
+    ] + select(soong_config_variable("tinyhal", "voice_recof_req_sthal"), {
+        true: ["libscc_audio"],
+        default: [],
+    }),
     header_libs: [
         "libtinyalsav2_headers",
         "tinyhal_headers",
@@ -50,47 +61,4 @@ cc_library_shared {
         "libmedia_helper",
     ],
     srcs: ["audio_hw.c"],
-}
-
-soong_config_module_type {
-    name: "tinyhal_cc_defaults",
-    module_type: "cc_defaults",
-    config_namespace: "tinyhal",
-    bool_variables: [
-        "tinycompress_tstamp_long",
-        "tinyhal_compress_playback",
-        "voice_recof_req_sthal",
-    ],
-    properties: [
-        "cflags",
-        "shared_libs",
-    ],
-}
-
-soong_config_bool_variable {
-    name: "tinycompress_tstamp_long",
-}
-
-soong_config_bool_variable {
-    name: "tinyhal_compress_playback",
-}
-
-soong_config_bool_variable {
-    name: "voice_recof_req_sthal",
-}
-
-tinyhal_cc_defaults {
-    name: "audio.primary.tinyhal-defaults",
-    soong_config_variables: {
-        tinycompress_tstamp_long: {
-            cflags: ["-DTINYCOMPRESS_TSTAMP_IS_LONG"],
-        },
-        tinyhal_compress_playback: {
-            cflags: ["-DTINYHAL_COMPRESS_PLAYBACK"],
-        },
-        voice_recof_req_sthal: {
-            cflags: ["-DENABLE_STHAL_STREAMS"],
-            shared_libs: ["libscc_audio"],
-        },
-    },
 }

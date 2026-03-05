@@ -19,7 +19,6 @@
 
 cc_library_shared {
     name: "libaudiohalcm",
-    defaults: ["libaudiohalcm-defaults"],
     proprietary: true,
     vendor: true,
     cflags: [
@@ -27,7 +26,16 @@ cc_library_shared {
         "-Werror",
         "-Wno-error=unused-parameter",
         "-Wno-unused-parameter",
-    ],
+    ] + select(soong_config_variable("tinyhal", "libaudiohalcm_continue_on_ctl_open_error"), {
+        true: ["-DLIBAUDIOHALCM_CONTINUE_ON_CTL_OPEN_ERROR"],
+        default: [],
+    }) + select(soong_config_variable("tinyhal", "tinyalsa_no_add_new_ctrls"), {
+        true: ["-DTINYALSA_NO_ADD_NEW_CTRLS"],
+        default: [],
+    }) + select(soong_config_variable("tinyhal", "tinyalsa_no_ctl_get_id"), {
+        true: ["-DTINYALSA_NO_CTL_GET_ID"],
+        default: [],
+    }),
     shared_libs: [
         "libcutils",
         "libdl",
@@ -42,45 +50,4 @@ cc_library_shared {
         "tinyhal_headers",
     ],
     srcs: ["audio_config.c"],
-}
-
-soong_config_module_type {
-    name: "libaudiohalcm_cc_defaults",
-    module_type: "cc_defaults",
-    config_namespace: "tinyhal",
-    bool_variables: [
-        "libaudiohalcm_continue_on_ctl_open_error",
-        "tinyalsa_no_add_new_ctrls",
-        "tinyalsa_no_ctl_get_id",
-    ],
-    properties: [
-        "cflags",
-    ],
-}
-
-soong_config_bool_variable {
-    name: "libaudiohalcm_continue_on_ctl_open_error",
-}
-
-soong_config_bool_variable {
-    name: "tinyalsa_no_add_new_ctrls",
-}
-
-soong_config_bool_variable {
-    name: "tinyalsa_no_ctl_get_id",
-}
-
-libaudiohalcm_cc_defaults {
-    name: "libaudiohalcm-defaults",
-    soong_config_variables: {
-        libaudiohalcm_continue_on_ctl_open_error: {
-            cflags: ["-DLIBAUDIOHALCM_CONTINUE_ON_CTL_OPEN_ERROR"],
-        },
-        tinyalsa_no_add_new_ctrls: {
-            cflags: ["-DTINYALSA_NO_ADD_NEW_CTRLS"],
-        },
-        tinyalsa_no_ctl_get_id: {
-            cflags: ["-DTINYALSA_NO_CTL_GET_ID"],
-        },
-    },
 }
