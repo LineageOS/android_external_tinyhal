@@ -36,6 +36,36 @@ cc_library_shared {
     }) + select(soong_config_variable("tinyhal", "voice_recof_req_sthal"), {
         true: ["-DENABLE_STHAL_STREAMS"],
         default: [],
+    }) + select(soong_config_variable("tinyhal", "out_period_size_default"), {
+        any @ flag_val: ["-DOUT_PERIOD_SIZE_DEFAULT=" + flag_val],
+        default: ["-DOUT_PERIOD_SIZE_DEFAULT=256"],
+    }) + select(soong_config_variable("tinyhal", "out_period_count_default"), {
+        any @ flag_val: ["-DOUT_PERIOD_COUNT_DEFAULT=" + flag_val],
+        default: ["-DOUT_PERIOD_COUNT_DEFAULT=4"],
+    }) + select(soong_config_variable("tinyhal", "out_channel_mask_default"), {
+        any @ flag_val: ["-DOUT_CHANNEL_MASK_DEFAULT=" + flag_val],
+        default: ["-DOUT_CHANNEL_MASK_DEFAULT=AUDIO_CHANNEL_OUT_STEREO"],
+    }) + select(soong_config_variable("tinyhal", "out_channel_count_default"), {
+        any @ flag_val: ["-DOUT_CHANNEL_COUNT_DEFAULT=" + flag_val],
+        default: ["-DOUT_CHANNEL_COUNT_DEFAULT=2"],
+    }) + select(soong_config_variable("tinyhal", "out_rate_default"), {
+        any @ flag_val: ["-DOUT_RATE_DEFAULT=" + flag_val],
+        default: ["-DOUT_RATE_DEFAULT=44100"],
+    }) + select(soong_config_variable("tinyhal", "in_period_size_default"), {
+        any @ flag_val: ["-DIN_PERIOD_SIZE_DEFAULT=" + flag_val],
+        default: ["-DIN_PERIOD_SIZE_DEFAULT=256"],
+    }) + select(soong_config_variable("tinyhal", "in_period_count_default"), {
+        any @ flag_val: ["-DIN_PERIOD_COUNT_DEFAULT=" + flag_val],
+        default: ["-DIN_PERIOD_COUNT_DEFAULT=4"],
+    }) + select(soong_config_variable("tinyhal", "in_channel_mask_default"), {
+        any @ flag_val: ["-DIN_CHANNEL_MASK_DEFAULT=" + flag_val],
+        default: ["-DIN_CHANNEL_MASK_DEFAULT=AUDIO_CHANNEL_IN_MONO"],
+    }) + select(soong_config_variable("tinyhal", "in_channel_count_default"), {
+        any @ flag_val: ["-DIN_CHANNEL_COUNT_DEFAULT=" + flag_val],
+        default: ["-DIN_CHANNEL_COUNT_DEFAULT=1"],
+    }) + select(soong_config_variable("tinyhal", "in_rate_default"), {
+        any @ flag_val: ["-DIN_RATE_DEFAULT=" + flag_val],
+        default: ["-DIN_RATE_DEFAULT=44100"],
     }),
     shared_libs: [
         "libaudiohalcm",
