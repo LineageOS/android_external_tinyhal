@@ -36,6 +36,12 @@ cc_library_shared {
     }) + select(soong_config_variable("tinyhal", "voice_recof_req_sthal"), {
         true: ["-DENABLE_STHAL_STREAMS"],
         default: [],
+    }) + select(soong_config_variable("tinyhal", "out_rate_default"), {
+        any @ flag_val: ["-DOUT_RATE_DEFAULT=" + flag_val],
+        default: [],
+    }) + select(soong_config_variable("tinyhal", "in_rate_default"), {
+        any @ flag_val: ["-DIN_RATE_DEFAULT=" + flag_val],
+        default: [],
     }),
     shared_libs: [
         "libaudiohalcm",
