@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "450b1fe4_df42687d",
+        "filename": "audio/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2026-03-12T14:28:55Z",
+      "side": 1,
+      "message": "I\u0027d move the define as a whole here and remove the define in .c\n\n\n```suggestion\n        default: [\"-DOUT_RATE_DEFAULT\u003d44100\"],\n```",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 20
+      },
+      "revId": "b4464d4527b3a7a53765ef978776f7798aaab948",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
